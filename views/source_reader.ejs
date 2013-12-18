@@ -9,16 +9,17 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2><%= file %></h2>
+			<h2 id="file_path"><%= file %></h2>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-lg-3">
+			<div class="fix-side">
+				<% include widget/project.ejs %>
 
-			<% include widget/project.ejs %>
-
-			<% include widget/outline.ejs %>
+				<% include widget/outline.ejs %>
+			</div>
 
 		</div>
 		<div class="col-lg-9">
@@ -32,7 +33,7 @@
 		</div>
 	</div>
 
-	<% include template/footer %>
+	<% include template/footer.ejs %>
 
 </div>
 <!-- /container -->

@@ -31,6 +31,10 @@ pre span{
 
 }
 
-
-
+.fix-side{
+	position: fixed;
+}
+#path_tree ul{
+	padding-left: 1em;
+}
 

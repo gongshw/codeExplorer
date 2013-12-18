@@ -2,7 +2,31 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Project</h3>
 	</div>
-
 	<div class="panel-body">
+		<div id="path_tree"></div>
 	</div>
 </div>
+
+<script>
+
+	$(function () {
+		var folders = $('#file_path').text().split('/');
+		var $parent_ele = $('#path_tree');
+		var current_path = '/';
+		for (var i = 0; i < folders.length-1; i++) {
+			var $ul = $('<ul></ul>');
+			var $li = $('<li></li>');
+			var $a = $('<a></a>');
+			$a.attr('href', 'source' + current_path + folders[i] + '/');
+			$a.text(folders[i] + '/');
+			current_path += folders[i] + '/';
+			$li.append($a);
+			$ul.append($li);
+			$parent_ele.append($ul);
+			$parent_ele = $li;
+		}
+
+
+	});
+
+</script>

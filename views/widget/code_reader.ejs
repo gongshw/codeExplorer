@@ -2,7 +2,18 @@
 	<div class="panel-heading">
 		<h3 class="panel-title"><%= file %></h3>
 	</div>
-	<div class="panel-body">
-		<%- codes %>
+	<div class="panel-body" id="code_panel">
+		<div style="height: 300px;text-align: center">
+			<span><img src="img/ajax-loader.gif"/><%- codes %></span>
+		</div>
+
 	</div>
 </div>
+
+<script>
+
+	$(function () {
+		$('#code_panel').load('ajax/code/<%=file%>');
+	});
+
+</script>
