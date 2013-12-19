@@ -13,7 +13,9 @@
 <script>
 
 	$(function () {
-		$('#code_panel').load('ajax/code/<%=file%>');
+		$('#code_panel').load('ajax/code/<%=file%>',function () {
+			$('a[name*="l-"]').text(' ');
+		});
 	});
 
 </script>

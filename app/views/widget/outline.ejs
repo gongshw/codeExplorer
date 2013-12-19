@@ -5,5 +5,14 @@
 	</div>
 
 	<div class="panel-body">
+		<div id="outline_defines"></div>
 	</div>
 </div>
+
+<script>
+
+	$(function () {
+		$('#outline_defines').load('ajax/outline/<%=file%>');
+	});
+
+</script>
