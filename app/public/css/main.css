@@ -37,6 +37,15 @@ pre span {
 
 a[name*='l-'] {
 	position: relative;
-	top: -200px;
+	top: -220px;
 	visibility: hidden;
+}
+
+span[id*='l-']:hover{
+	width: 100%;
+	background: white;
+}
+
+span[id*='l-']{
+	display: block;
 }
