@@ -39,16 +39,35 @@ app.get('/source/(*)', function (req, res) {
 	});
 });
 
+/* read src file */
+app.get('/search/', function (req, res) {
+
+	var keyword = req.query.q;
+
+	global.searchSymbol(src_root, keyword, function (result) {
+		res.send(result);
+	});
+
+
+});
+
 /* ajax call; get highlight codes */
 app.get('/ajax/code/(*)', function (req, res) {
 	var file_path = src_root + '/' + req.params[0];
-	highlight(file_path, function (error, stdout, stderr) {
 
-		if (!error) {
-			res.send(stdout);
+	project.fileType(file_path, function (meta) {
+		if (meta['isText']) {
+			highlight(file_path, function (error, stdout, stderr) {
+				if (!error) {
+					res.send(stdout);
+				}
+			});
+		} else {
+			res.send('non text file. file type: ' + meta['type']);
 		}
-
 	});
+
+
 });
 
 /* ajax call; get highlight codes */
@@ -79,8 +98,15 @@ app.get('/ajax/outline/(*)', function (req, res) {
 	global.getSymbolDefines(src_root, file, function (error, symbols) {
 		res.render('template/defines', {
 			symbols: symbols,
-			base_url:'source/'+file
+			base_url: 'source/' + file
 		});
+	});
+});
+
+app.get('/ajax/fileMeta/(*)', function (req, res) {
+	var file = src_root + '/' + req.params[0];
+	project.fileType(file, function (meta) {
+		res.send(meta);
 	});
 });
 

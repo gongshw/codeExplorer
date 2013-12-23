@@ -1,6 +1,8 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title"><%= file %></h3>
+		<h3 class="panel-title"><%= file %>
+			<small>(<span id="file_type"></span>, <span id="file_size"></span> bytes)</small>
+		</h3>
 	</div>
 	<div class="panel-body" id="code_panel">
 		<div style="height: 300px;text-align: center">
@@ -13,8 +15,16 @@
 <script>
 
 	$(function () {
-		$('#code_panel').load('ajax/code/<%=file%>',function () {
+		//get code body
+		$('#code_panel').load('ajax/code/<%=file%>', function () {
 			$('a[name*="l-"]').text(' ');
+		});
+
+		//get file meta info
+		$.get('ajax/fileMeta/<%=file%>', function (meta) {
+			$('#file_type').text(meta['type']);
+			$('#file_size').text(meta['size']);
+
 		});
 	});
 

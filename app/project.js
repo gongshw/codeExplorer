@@ -3,6 +3,9 @@
  */
 
 var fs = require('fs');
+var exec = require('child_process').exec;
+var file_cmd = 'file -b';
+var text_reg = /.*text.*/g;
 
 exports.readPath = function (file_path, file_callback, dir_callback) {
 	fs.stat(file_path, function (err, stats) {
@@ -19,7 +22,19 @@ exports.readPath = function (file_path, file_callback, dir_callback) {
 
 			}
 		} else {
-			res.send('404');
 		}
 	});
+}
+
+exports.fileType = function (file, callback) {
+	exec(file_cmd + ' ' + file, function (error, stdout, stderr) {
+		if (!error) {
+			var type = stdout;
+			var isText = type.match(text_reg) != null;
+			var fileSize = fs.statSync(file)['size'];
+			callback({isText: isText, type: type, size: fileSize});
+		} else {
+			callback(stderr);
+		}
+	})
 }
