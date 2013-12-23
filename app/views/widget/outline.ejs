@@ -12,7 +12,20 @@
 <script>
 
 	$(function () {
-		$('#outline_defines').load('ajax/outline/<%=file%>');
+		$('#outline_defines').load('ajax/outline/<%=file%>', function () {
+			$('#outline_defines li a').click(function (e) {
+				e.preventDefault();
+				var target_span = $('#l-' + $(this).data('line'));
+				console.log(target_span);
+				$(document.body).animate({scrollTop: target_span.offset().top - 150 }, 80, function () {
+					target_span.addClass('animated flash').
+							one('webkitAnimationEnd oAnimationEnd', function () {
+								$(this).removeClass('animated flash');
+							});
+				});
+
+			});
+		});
 	});
 
 </script>

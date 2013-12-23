@@ -1,5 +1,5 @@
 <ul>
 	<% for(var i = 0; i < symbols.length; i++) { %>
-	<li><a href="<%= base_url%>#l-<%= symbols[i]['line'] %>"><%= symbols[i]['name'] %></a></li>
+	<li><a class="go_to_line" data-line="<%= symbols[i]['line']%>" href="<%= base_url%>#l-<%= symbols[i]['line'] %>"><%= symbols[i]['name'] %></a></li>
 	<% } %>
 </ul>

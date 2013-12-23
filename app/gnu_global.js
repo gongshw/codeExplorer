@@ -9,7 +9,6 @@ var CMD_GLOBAL_F = 'global -f';
 /* exec gtags in given path*/
 exports.gtags = function (path, callback) {
 	exec(CMD_GTAGS, {cwd: path}, function (error, stdout, stderr) {
-		console.log(stderr);
 		callback(error, stdout, stderr);
 	});
 }
@@ -18,8 +17,6 @@ exports.gtags = function (path, callback) {
 /* assume that filename not contain whitespace*/
 exports.getSymbolDefines = function (root_path, file, callback) {
 	exec(CMD_GLOBAL_F + ' "' + file + '"', {cwd: root_path}, function (error, stdout, stderr) {
-		console.log(stdout);
-
 		var lines = stdout.split(/\n/g);
 		var symbols = [];
 		for (var index in lines) {

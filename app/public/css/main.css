@@ -35,12 +35,6 @@ pre span {
 	padding-left: 1em;
 }
 
-a[name*='l-'] {
-	position: relative;
-	top: -220px;
-	visibility: hidden;
-}
-
 span[id*='l-']:hover{
 	width: 100%;
 	background: white;
@@ -48,4 +42,5 @@ span[id*='l-']:hover{
 
 span[id*='l-']{
 	display: block;
+	white-space: pre;
 }
