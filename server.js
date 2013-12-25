@@ -40,14 +40,21 @@ app.get('/source/(*)', function (req, res) {
 });
 
 /* read src file */
-app.get('/search/', function (req, res) {
+app.get('/search', function (req, res) {
 
 	var keyword = req.query.q;
+	var ajax = req.query.a;
 
 	global.searchSymbol(src_root, keyword, function (result) {
-		res.send(result);
+		if (ajax) {
+			res.send(result);
+		} else {
+			res.render('search_result', {
+				defines:result,
+				title: 'search for "' + keyword + '"'
+			});
+		}
 	});
-
 
 });
 

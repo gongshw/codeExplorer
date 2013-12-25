@@ -13,9 +13,10 @@
 				<li class="active"><a href="">Home</a></li>
 			</ul>
 
-			<form class="navbar-form navbar-right" action="search/">
+			<form class="navbar-form navbar-right" action="search">
 				<div class="form-group">
-					<input type="text" placeholder="symbols ... " class="form-control" name="q">
+					<input type="text" placeholder="symbols ... " class="form-control" name="q"
+					       value="<%= query.q?query.q:'' %>">
 				</div>
 				<button type="submit" class="btn btn-success">Search</button>
 			</form>

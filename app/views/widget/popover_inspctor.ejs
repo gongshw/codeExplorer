@@ -1,0 +1,49 @@
+<script>
+
+	function attach_select_listener($eles) {
+		$eles.on('mouseup', function (event) {
+			event.preventDefault();
+			var $target = $(event.target);
+			if ($target.is('span')) {
+				$('[data-toggle]').popover('hide');
+				$('[data-toggle]').popover('destroy');
+			}
+			var t = (document.all) ? document.selection.createRange().text : document.getSelection().toString();
+			if (t.length > 0 && t[t.length - 1] == ' ') {
+				t = t.substr(0, t.length - 1);
+			}
+			if (t.match(/^[^\s]+$/)) {
+				var clone_body = $('#popover_prototype_wrapper .popover_body').clone();
+				clone_body.find('div').attr('id', 'defines_inspector_body')
+				var options = {html: true, trigger: 'manual', title: 'inspect symbol: ' + t, content: clone_body.html(), placement: 'top'};
+				$target.attr('data-toggle', 'popover').popover(options);
+				$(event.target).popover('show');
+				$.get('search', {q: t, a: 1}, function (defines) {
+					var defines_body = $('#defines_inspector_body');
+					if (defines.length == 0) {
+						defines_body.text('no defines found for ' + t);
+					} else {
+						var $ul = $('<ul/>');
+						for (var index in defines) {
+							var html = '<li><h4><a href="source/' + defines[index]['file'] + '#line-' +
+									defines[index]['line'] + '">' + defines[index]['file'] +
+									' (L' + defines[index]['line'] + ')</a></h4></li>';
+							$ul.append($(html));
+						}
+						defines_body.empty().append($ul);
+					}
+					console.log(defines);
+				});
+			}
+			return false;
+		});
+	}
+</script>
+
+<div id="popover_prototype_wrapper" style="display: none">
+	<span class="popover_h">inspect symbol: <span class="symbol_name"></span></span>
+
+	<div class="popover_body">
+		<div><img src="img/ajax-loader.gif"/>loading ...</div>
+	</div>
+</div>

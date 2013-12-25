@@ -1,0 +1,31 @@
+<% include template/html_tag_start.ejs %>
+<% include template/head_tag.ejs %>
+<body>
+<% include template/ie_warning.ejs %>
+<% include template/header.ejs %>
+
+<div class="container">
+	<!-- Example row of columns -->
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h2 id="file_path"><%= title %></h2>
+
+			<h3>defines</h3>
+			<ul>
+				<% for(var i = 0; i < defines.length; i++) { %>
+				<li><h4><a href="source/<%= defines[i]['file'] %>#line-<%= defines[i]['line'] %>"><%= defines[i]['file'] %>
+						(L<%= defines[i]['line'] %>)</a> <small><%= defines[i]['define'] %></small></h4></li>
+				<% } %>
+
+			</ul>
+
+		</div>
+	</div>
+
+	<% include template/footer.ejs %>
+
+</div>
+<!-- /container -->
+</body>
+</html>

@@ -12,12 +12,18 @@
 	</div>
 </div>
 
+
 <script>
 
 	$(function () {
 		//get code body
 		$('#code_panel').load('ajax/code/<%=file%>', function () {
 			$('a[name*="l-"]').text(' ');
+			attach_select_listener($('#code_panel span[class]'));
+			var matches = location.href.match(/#line-(\d+)/);
+			if (matches != null) {
+				go_to_line(matches[1]);
+			}
 		});
 
 		//get file meta info
@@ -29,3 +35,5 @@
 	});
 
 </script>
+
+<% include popover_inspctor.ejs %>
